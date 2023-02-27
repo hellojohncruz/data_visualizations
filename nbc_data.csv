@@ -1,0 +1,16 @@
+﻿race,year,pop_pct
+white,1960,85
+black,1960,10
+hispanic,1960,5
+asian,1960,1
+other,1960,0
+white,2010,64
+black,2010,12
+hispanic,2010,16
+asian,2010,6
+other,2010,2
+white,2060,43
+black,2060,13
+hispanic,2060,31
+asian,2060,8
+other,2060,5

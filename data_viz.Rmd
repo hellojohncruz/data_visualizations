@@ -1,0 +1,93 @@
+---
+title: "data_viz"
+author: "John Cruz"
+date: "2023-02-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r library, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(directlabels)
+```
+
+![](https://lh4.googleusercontent.com/OXPQJTUm1uW8HUThBcrHtdVtw0jwZSHd0iCDg3qZXmZ2xr9ms7sSzIi4Ee9FGcC7WZ_zlXf7oFoe0mham6BMKBVYZA57awhJ8zGao4D8lXEv_5tBO_AaNxlJDHiuoCmyd-GHyE-4ggJegAliLml0A5Azqw=s2048)
+
+```{r bush-tax}
+year <- c('1/1/2012', '1/1/2013')
+rate <- c(0.35, 0.396)
+
+bush_tax <- data.frame(year, rate)
+
+bush_tax |> 
+  ggplot(aes(x = year, y = rate)) +
+  geom_bar(stat = 'identity', fill = '#FFBA00') +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(label = paste0(rate * 100, '%'), vjust = 1.5, fontface = 'bold')
+```
+
+\##
+
+![](https://lh3.googleusercontent.com/sSjPrh9e-imTRsNZkSmD_MQI1yYEQVEuoYvI43E2rBaLDRMnj7Mu2Aq9O0xv6SUOs7UQ8Aducce1gQYtD4zbEQqcfErKNouTHhUwg6zo-4PNGSLbJjkdDdub_NPJhrUtGYMqHCIj4TZF50gqnlL_Hj9ngQ=s2048){width="461"}
+
+```{r fl-guns}
+year <- c(1990:2012)
+rate <- c(873, 800, 780, 800, 770, 720, 700, 690, 590, 450, 480, 480, 560, 590, 580, 570, 770, 820, 790, 700, 680, 700, 721)
+
+fl_deaths <- data.frame(year, rate)
+
+fl_deaths |> 
+  ggplot(aes(x = year, y = rate)) +
+  geom_area(alpha = 0.5, fill = 'red') +
+  geom_point() +
+  theme_bw() +
+  geom_vline(xintercept = 2005, linewidth = 1, colour = 'black') 
+```
+
+
+
+
+
+![](https://lh5.googleusercontent.com/W5MC2f0S8BIxA7vp9LYqDMmiLlrLN1XfIc_GeF8pMYQ4nLYDdSCobO-Av4j662f8D0sWlRsSq5ksXhrIaURz8M_QOQVykA-Jc4bU7r3k8GCtG7LRgxWOJS3dXbi0jSarc8deyoN1oUasqE3NLD9w-CBYYg=s2048){width="599"}
+
+
+```{r purdue-pharma, message = FALSE}
+time <- c(0:12)
+rate <- c(550, 780, 870, 550, 780, 970, 550, 780, 870, 550, 780, 670, 570)
+
+purdue_pharma <- data.frame(time, rate)
+
+purdue_pharma |> 
+  ggplot(aes(x = time, y = rate)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth(se=FALSE, method = 'lm', color = 'darkblue') +
+  geom_smooth (se=FALSE, method = 'loess', color = 'darkred') +
+  theme_bw()
+```
+
+
+
+![](https://lh3.googleusercontent.com/zSNSNAmC54eMyVJEMHcVtr9MHrbF9nyJCv4SQfDoCZMpGRsnHsasGbCGV7owrICro49f2_UsrnGz0M58m2fh0yRQtvxDuY-6PGs4-O2Y7tqniJw9Wp4G1zdfKrrQymZaqz9dZlRPN_ZoNqam5U61YNgyPw=s2048)
+
+
+```{r nbc-news, message = FALSE}
+nbc <- read_csv('nbc_data.csv')
+
+nbc$race <- factor(nbc$race, levels = rev(c('white', 'black', 'hispanic', 'asian', 'other')))
+
+nbc |> ggplot(aes(x = as.factor(year), y = pop_pct, fill = race)) +
+  geom_bar(stat = 'identity') +
+  theme_bw() +
+  scale_fill_brewer(palette = 'Set1') +
+  xlab('year')
+
+nbc |> ggplot(aes(x = year, y = pop_pct, color = race)) +
+  geom_line() +
+  geom_point() +
+  theme_bw() +
+  scale_color_brewer(palette = 'Set1') 
+```
