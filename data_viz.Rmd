@@ -1,7 +1,7 @@
 ---
-title: "data_viz"
+title: "Ethical Data Visualizations"
 author: "John Cruz"
-date: "2023-02-27"
+date: "2023-02-25"
 output: html_document
 ---
 
@@ -41,10 +41,10 @@ fl_deaths <- data.frame(year, rate)
 
 fl_deaths |> 
   ggplot(aes(x = year, y = rate)) +
-  geom_area(alpha = 0.5, fill = 'red') +
+  geom_line() +
   geom_point() +
   theme_bw() +
-  geom_vline(xintercept = 2005, linewidth = 1, colour = 'black') 
+  geom_vline(xintercept = 2005, linewidth = 1, colour = 'red') 
 ```
 
 
